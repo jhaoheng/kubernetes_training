@@ -23,24 +23,24 @@
 	- `gcloud container images list-tags [image_name]`
 7. 刪除 image : `gcloud container images delete [hostname]/[project_id]/[image_name]:[tag]`
 
-## 建立 clusters 部署
-1. Creating a Kubernetes Engine cluster(GKE)
-	1. 建立 : 
-		- `kubectl get services`
-		- `gcloud container clusters create {GKE-name} --zone=`
-			- `gcloud compute zones list`
-		- `kubectl get services`
-		- 會建立 
-			- kubernetes cluster[kubernetes engine] : `gcloud container clusters list`
-			- compute engine group : `gcloud compute instance-groups list`
-			- compute engine template : `gcloud compute instance-templates list`
-			- compute engine instance : `gcloud compute instances list`
-	2. 試著刪除掉一個 instance : `gcloud compute instances delete {instance-name}` 
-		- 會再建立回來
-		- 查詢時間 : `gcloud compute instances describe {name} | grep Timestamp`
-2. 設定 kubectl 取得憑證 : 
+## 建立 GKE : clusters 部署
+
+1. 建立 : 
+	- `gcloud container clusters create {GKE-name} --zone=`
+		- `gcloud compute zones list`
+	- 查詢
+		- kubernetes cluster[kubernetes engine] : `gcloud container clusters list`
+		- compute engine group : `gcloud compute instance-groups list`
+		- compute engine template : `gcloud compute instance-templates list`
+		- compute engine instance : `gcloud compute instances list`
+2. 試著刪除掉一個 instance : `gcloud compute instances delete {instance-name}` 
+	- 會再建立回來
+	- 查詢時間 : `gcloud compute instances describe {name} | grep Timestamp`
+		
+## deploy 到 cluster
+1. 設定 kubectl 取得憑證 : 
 	- `gcloud container clusters get-credentials {CLUSTER_NAME}`
-3. deploy image to cluster 
+2. deploy image to cluster 
 	- Creating the Deployment : (建立 deployment)
 		- `kubectl run {Deployment-name} --image={location}/{project_id}/{image_name}:{tag} --port={port}`
 			- ex : `kubectl run hello-server --image gcr.io/google-samples/hello-app:1.0 --port 8080`
@@ -52,5 +52,5 @@
 		- `kubectl get services`
 	- 取得對外 ip : `kubectl get service {name}`
 	- 查看 : `kubectl get --help`
-4. delete service & deployment : 
+3. delete service & deployment : 
 	- `kubectl delete service,deployment {Deployment-name}`

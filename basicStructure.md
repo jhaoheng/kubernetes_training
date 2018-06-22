@@ -38,7 +38,10 @@
 	- Kubernetes Master
 
 ## Pod 
-是 containers 的集合
+> A pod (as in a pod of whales or pea pod) is a group of one or more containers (such as Docker containers)
+
+- 是一個 container 
+- pods 是多個 containers 的集合
 
 ## Lable
 - 負責標記 pods(deployment) or pod

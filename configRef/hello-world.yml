@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+spec: # DeploymentSpec
+  selector:
+    matchLabels:
+      app: test
+  replicas: 1 
+  template: # PodTemplateSpec
+    metadata:
+      labels:
+        app: test
+    spec: # PodSpec
+      hostNetwork: true # PodIP = HostIP
+      containers:
+        - name: nginx
+          image: nginx:latest
+          # tty: true
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: hello-world
+# spec:
+#   selector:
+#     app: test
+#   ports:
+#     - name: http
+#       protocol: TCP
+#       port: 80
+#       targetPort: 80
+#   type: LoadBalancer # ClusterIP, NodePort, LoadBalancer, ExternalName

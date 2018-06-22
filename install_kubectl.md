@@ -11,4 +11,10 @@
 ## 透過 gcloud
 
 1. 安裝 gcloud
-2. 執行 `gclone component install kubectl`
+2. 執行 `gcloud components install kubectl`
+
+## 更新
+1. gcloud update
+2. gcloud components update
+3. gcloud components remove kubectl
+4. gcloud components install kubectl
